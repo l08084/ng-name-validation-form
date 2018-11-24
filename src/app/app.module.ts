@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -20,12 +20,12 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatIconModule,
-    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
