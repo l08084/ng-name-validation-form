@@ -11,6 +11,9 @@ export class AppComponent implements OnInit {
 
   public nameRegisterForm: FormGroup;
   public nameControl: FormControl;
+  // add this!
+  public passwordControl: FormControl;
+  public hide = true;
 
   constructor(private builder: FormBuilder) {
     this.createForm();
@@ -18,6 +21,8 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.nameControl = this.nameRegisterForm.get('email') as FormControl;
+    // add this!
+    this.passwordControl = this.nameRegisterForm.get('password') as FormControl;
   }
 
   public onSubmit() {
@@ -27,13 +32,13 @@ export class AppComponent implements OnInit {
   /**
    * フォームグループの初期化を実行する
    *
-   * @private
-   * @memberof AppComponent
    */
   private createForm() {
     // 氏名欄のバリデーションを設定している
     this.nameRegisterForm = this.builder.group({
-      name: ['', [Validators.required, CustomValidator.haveBlank]]
+      name: ['', [Validators.required, CustomValidator.haveBlank]],
+      // add this!
+      password: ['', [Validators.required]]
     });
   }
 }

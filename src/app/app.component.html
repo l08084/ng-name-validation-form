@@ -14,6 +14,12 @@
           <!-- スペースがない場合のエラーメッセージ -->
           <mat-error *ngIf="nameRegisterForm.controls.name.errors?.haveBlank">姓と名の間にはスペースを入力してください</mat-error>
         </mat-form-field>
+        <mat-form-field class="input-field">
+            <input [type]="hide ? 'password' : 'text'" matInput
+              placeholder="パスワード" id="password" name="password" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error *ngIf="nameRegisterForm.controls.password.errors?.required">You must enter a value</mat-error>
+          </mat-form-field>
         <!-- 登録ボタン -->
         <button type="submit" class="register-button"
           mat-raised-button color="primary" [disabled]="nameRegisterForm.invalid">登録</button>
