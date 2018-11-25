@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { CustomValidator } from './custom-validator';
 
 @Component({
   selector: 'app-root',
@@ -23,9 +24,16 @@ export class AppComponent implements OnInit {
     console.log();
   }
 
+  /**
+   * フォームグループの初期化を実行する
+   *
+   * @private
+   * @memberof AppComponent
+   */
   private createForm() {
+    // 氏名欄のバリデーションを設定している
     this.nameRegisterForm = this.builder.group({
-      name: ['', [Validators.required]]
+      name: ['', [Validators.required, CustomValidator.haveBlank]]
     });
   }
 }

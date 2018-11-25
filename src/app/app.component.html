@@ -6,10 +6,15 @@
     <mat-card-content>
       <form [formGroup]="nameRegisterForm" (ngSubmit)="onSubmit()" class="login-form">
         <mat-form-field class="input-field">
+          <!-- 氏名の入力フォーム -->
           <input matInput placeholder="氏名(姓と名の間にスペースを入力してください)"
             id="name" name="name" [formControl]="nameRegisterForm.controls.name" required>
-          <mat-error *ngIf="nameRegisterForm.controls.name.errors?.required">氏名は、必須入力です</mat-error>
+          <!-- 必須入力のエラーメッセージ -->
+          <mat-error *ngIf="nameRegisterForm.controls.name.errors?.required">氏名は必須入力です</mat-error>
+          <!-- スペースがない場合のエラーメッセージ -->
+          <mat-error *ngIf="nameRegisterForm.controls.name.errors?.haveBlank">姓と名の間にはスペースを入力してください</mat-error>
         </mat-form-field>
+        <!-- 登録ボタン -->
         <button type="submit" class="register-button"
           mat-raised-button color="primary" [disabled]="nameRegisterForm.invalid">登録</button>
       </form>
