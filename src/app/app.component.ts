@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   public nameControl: FormControl;
   // add this!
   public passwordControl: FormControl;
+  public confirmPasswordControl: FormControl;
   public hide = true;
 
   constructor(private builder: FormBuilder) {
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     this.nameControl = this.nameRegisterForm.get('email') as FormControl;
     // add this!
     this.passwordControl = this.nameRegisterForm.get('password') as FormControl;
+    this.confirmPasswordControl = this.nameRegisterForm.get('confirmPassword') as FormControl;
   }
 
   public onSubmit() {
@@ -38,7 +40,10 @@ export class AppComponent implements OnInit {
     this.nameRegisterForm = this.builder.group({
       name: ['', [Validators.required, CustomValidator.haveBlank]],
       // add this!
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]]
+    }, {
+      validator: CustomValidator.matchPassword
     });
   }
 }

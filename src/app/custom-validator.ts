@@ -1,7 +1,8 @@
-import { ValidationErrors, FormControl } from '@angular/forms';
+import { ValidationErrors, FormControl, AbstractControl } from '@angular/forms';
 
 export class CustomValidator {
 
+  // 姓と名の間にスペースが入っているか確認する
   static haveBlank(control: FormControl): ValidationErrors | null {
     const value = (control.value || '') + '';
     // 両端のスペースを取り除く
@@ -18,5 +19,14 @@ export class CustomValidator {
     }
     // 姓と名の間にスペースが入力されていない場合は、バリデーションエラーを返す
     return isError ? { haveBlank: true } : null;
+  }
+
+  // パスワードと確認用パスワードが一致するかチェック
+  static matchPassword(ac: AbstractControl) {
+    const password = ac.get('password').value;
+    const passwordConfirm = ac.get('confirmPassword').value;
+    if (password !== passwordConfirm) {
+      ac.get('confirmPassword').setErrors({ notMatchPassword: true });
+    }
   }
 }
