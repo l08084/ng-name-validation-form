@@ -4,37 +4,28 @@
       <mat-card-title class="login-title">アカウント登録</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="nameRegisterForm" (ngSubmit)="onSubmit()" class="login-form">
+      <form class="login-form">
         <!-- 氏名の入力フォーム -->
         <mat-form-field class="input-field">
           <input matInput placeholder="氏名(姓と名の間にスペースを入力してください)"
-            id="name" name="name" [formControl]="nameRegisterForm.controls.name" required>
-          <!-- 必須入力のエラーメッセージ -->
-          <mat-error *ngIf="nameRegisterForm.controls.name.errors?.required">氏名は必須項目です</mat-error>
-          <!-- スペースがない場合のエラーメッセージ -->
-          <mat-error *ngIf="nameRegisterForm.controls.name.errors?.haveBlank">姓と名の間にはスペースを入力してください</mat-error>
+            id="name" name="name" required>
         </mat-form-field>
-        <!-- add this! -->
         <!-- パスワードの入力フォーム -->
         <mat-form-field class="input-field">
           <input [type]="hide ? 'password' : 'text'" matInput
-            placeholder="パスワード" id="password" name="password" [formControl]="nameRegisterForm.controls.password" required>
+            placeholder="パスワード" id="password" name="password" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="nameRegisterForm.controls.password.errors?.required">パスワードは必須項目です</mat-error>
         </mat-form-field>
         <!-- 確認用パスワードの入力フォーム -->
         <mat-form-field class="input-field">
           <input [type]="hide ? 'confirmPassword' : 'text'" matInput
-            placeholder="確認用パスワード" id="confirmPassword" name="confirmPassword" [formControl]="nameRegisterForm.controls.confirmPassword" required>
+            placeholder="確認用パスワード" id="confirmPassword" name="confirmPassword" required>
           <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="nameRegisterForm.controls.confirmPassword.errors?.required">確認用パスワードは必須項目です</mat-error>
-          <!-- add this! -->
-          <!-- パスワードが一致しないときに表示するエラー -->
-          <mat-error *ngIf="nameRegisterForm.controls.confirmPassword.errors?.notMatchPassword">パスワードが一致しません</mat-error>
         </mat-form-field>
         <!-- 登録ボタン -->
-        <button type="submit" class="register-button"
-          mat-raised-button color="primary" [disabled]="nameRegisterForm.invalid">登録</button>
+        <button [appDoubleClickPrevention]="isLoading"
+          type="submit" class="register-button"
+          mat-raised-button color="primary">登録</button>
       </form>
     </mat-card-content>
   </mat-card>

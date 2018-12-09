@@ -11,39 +11,38 @@ export class AppComponent implements OnInit {
 
   public nameRegisterForm: FormGroup;
   public nameControl: FormControl;
-  // add this!
   public passwordControl: FormControl;
   public confirmPasswordControl: FormControl;
   public hide = true;
 
-  constructor(private builder: FormBuilder) {
-    this.createForm();
+  // HTTP通信中フラグ
+  public isLoading = false;
+
+  constructor() {
   }
 
   public ngOnInit(): void {
     this.nameControl = this.nameRegisterForm.get('email') as FormControl;
-    // add this!
     this.passwordControl = this.nameRegisterForm.get('password') as FormControl;
     this.confirmPasswordControl = this.nameRegisterForm.get('confirmPassword') as FormControl;
   }
 
+  /**
+   * 登録ボタン押下時に呼び出し、
+   * HTTP通信のダミーメソッドを呼ぶ
+   *
+   */
   public onSubmit() {
-    console.log();
+    this.callHttpDummy();
   }
 
   /**
-   * フォームグループの初期化を実行する
+   * HTTP通信のダミーメソッド
+   * 10秒間、HTTP通信中をTRUEにする
    *
    */
-  private createForm() {
-    // 氏名欄のバリデーションを設定している
-    this.nameRegisterForm = this.builder.group({
-      name: ['', [Validators.required, CustomValidator.haveBlank]],
-      // add this!
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
-    }, {
-      validator: CustomValidator.matchPassword
-    });
+  private callHttpDummy() {
+    this.isLoading = true;
+    setTimeout(() => this.isLoading = false, 100000);
   }
 }
